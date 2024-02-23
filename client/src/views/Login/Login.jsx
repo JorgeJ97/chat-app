@@ -1,4 +1,4 @@
-import styles from './Login.module.css'
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import loginUser from '../../utils/loginUser'
@@ -68,7 +68,7 @@ const Login = () => {
                         </div>
 
                         <span className='text-base text-white font-medium'
-                        >{"Don't"} have an account? <Link className='hover:underline hover:text-blue-500' to='/register'> Create account</Link>
+                        >{"Don't"} have an account? <Link className='hover:underline text-blue-500' to='/register'> Create account</Link>
                         </span>
 
 

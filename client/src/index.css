@@ -13,3 +13,24 @@ body {
     background-color: white;
 
 }
+
+::-webkit-scrollbar {
+    cursor: pointer;
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222121;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    cursor: pointer;
+    background: #555;
+}
+
+::-webkit-scrollbar-track:hover{
+    background: #242424;
+}
+
+

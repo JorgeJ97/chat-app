@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Register from './views/Register/Register';
 import Login from './views/Login/Login';
 import Chat from './views/Chat/Chat';
+import Home from './views/Home/Home';
 
 
 function App() {
@@ -10,17 +11,20 @@ function App() {
 
 
   return (
-    // <div className='p-4 h-screen flex items-center justify-center'>
+   
+    <div className='flex items-center justify-center h-screen bg-zinc-800'>
       <Routes>
-        <Route path='/register' element={<Register />} />
         <Route path='/' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/home' element={<Home/>} />
+
         {/* <Route path = '/chat' element = {<Chat /> } /> */}
         
 
       </Routes>
 
 
-    // </div>
+    </div>
 
 
   )
