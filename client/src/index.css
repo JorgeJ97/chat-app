@@ -29,7 +29,7 @@ body {
     background: #555;
 }
 
-::-webkit-scrollbar-track:hover{
+::-webkit-scrollbar-thumb:hover{
     background: #242424;
 }
 

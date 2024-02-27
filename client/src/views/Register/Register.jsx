@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import validate from '../../utils/validate';
 import registerUser from '../../utils/registerUser';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import errorNotification from '../../utils/errorNotification';
 
 const Register = () => {
     const navigate = useNavigate();
-
+    
     const [formValues, setFormValues] = useState({
         fullName: '',
         email: '',
@@ -25,21 +26,18 @@ const Register = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const submit = true;
-        const newErrors = validate(formValues, submit);
-
-        if (Object.keys(newErrors).length === 0) {
-            const data = await registerUser(formValues);
-            console.log(data);
-            if (data.registration) {
-                alert(data.msg);
-                navigate('/');
-            } else {
-                alert(data.msg);
+        
+        try {
+            const newErrors = await registerUser(formValues);
+            if(newErrors) {
+                setErrors(newErrors);
+                errorNotification("Correctly complete all fields");
             }
-        } else {
-            setErrors(newErrors);
-            alert('No se envia');
+            else navigate('/');
+
+
+        } catch (error) {
+            console.log(error.message);
         }
     };
 
@@ -159,140 +157,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-
-
-
-
-
-
-
-
-
-
-        // <div className='flex items-center justify-center m-0'>
-        //     <div className="flex items-center justify-center h-screen">
-        //         <div className="  bg-white rounded-lg shadow-lg w-full min-w-[400px]">
-        //             <div className=" rounded  bg-slate-50 border-b border-slate-300 py-4 px-8">
-        //                 <h2 className=" text-xl font-semibold text-black text-center">Create Account
-        //                     <span className="text-blue-500"> ChatApp</span>
-        //                 </h2>
-        //             </div>
-        //             <form className="py-8 px-10" onSubmit={(e) => handleSubmit(e)}>
-
-
-        //                 <div className="mb-3 pb-5 relative flex items-center justify-center">
-        //                     <input
-        //                         className={`w-full p-[10px] block bg-transparent text-sm rounded border-solid border ${errors.fullName ? 'border-red-500 focus:outline-none input-error' : 'border-slate-800 outline-slate-500 focus:outline'}`}
-        //                         type={'text'}
-        //                         placeholder={'Full Name'}
-        //                         name={'fullName'}
-        //                         value={formValues.fullName}
-        //                         onChange={(e) => handleChange(e)}
-        //                     />
-        //                     {errors.fullName && (
-        //                         <div>
-        //                             <small className="text-red-500 absolute left-0 bottom-0">{errors.fullName}</small>
-        //                             <FontAwesomeIcon icon={faCircleExclamation} className="text-red-500 absolute top-[12px] right-[10px]" />
-        //                         </div>
-        //                     )}
-        //                 </div>
-        //                 <div className="mb-3 pb-5 relative flex items-center justify-center">
-        //                     <input
-        //                         className={`w-full p-[10px] block bg-transparent text-sm rounded border-solid border ${errors.fullName ? 'border-red-500 focus:outline-none input-error' : 'border-slate-800 outline-slate-500 focus:outline'}`}
-        //                         type={'text'}
-        //                         placeholder={'Full Name'}
-        //                         name={'fullName'}
-        //                         value={formValues.fullName}
-        //                         onChange={(e) => handleChange(e)}
-        //                     />
-        //                     {errors.fullName && (
-        //                         <div>
-        //                             <small className="text-red-500 absolute left-0 bottom-0">{errors.fullName}</small>
-        //                             <FontAwesomeIcon icon={faCircleExclamation} className="text-red-500 absolute top-[12px] right-[10px]" />
-        //                         </div>
-        //                     )}
-        //                 </div>
-        //                 <div className="mb-3 pb-5 relative flex items-center justify-center">
-        //                     <input
-        //                         className={`w-full p-[10px] block bg-transparent text-sm rounded border-solid border ${errors.fullName ? 'border-red-500 focus:outline-none input-error' : 'border-slate-800 outline-slate-500 focus:outline'}`}
-        //                         type={'text'}
-        //                         placeholder={'Full Name'}
-        //                         name={'fullName'}
-        //                         value={formValues.fullName}
-        //                         onChange={(e) => handleChange(e)}
-        //                     />
-        //                     {errors.fullName && (
-        //                         <div>
-        //                             <small className="text-red-500 absolute left-0 bottom-0">{errors.fullName}</small>
-        //                             <FontAwesomeIcon icon={faCircleExclamation} className="text-red-500 absolute top-[12px] right-[10px]" />
-        //                         </div>
-        //                     )}
-        //                 </div>
-        //                 <div className="mb-3 pb-5 relative flex items-center justify-center">
-        //                     <input
-        //                         className={`w-full p-[10px] block bg-transparent text-sm rounded border-solid border ${errors.fullName ? 'border-red-500 focus:outline-none input-error' : 'border-slate-800 outline-slate-500 focus:outline'}`}
-        //                         type={'text'}
-        //                         placeholder={'Full Name'}
-        //                         name={'fullName'}
-        //                         value={formValues.fullName}
-        //                         onChange={(e) => handleChange(e)}
-        //                     />
-        //                     {errors.fullName && (
-        //                         <div>
-        //                             <small className="text-red-500 absolute left-0 bottom-0">{errors.fullName}</small>
-        //                             <FontAwesomeIcon icon={faCircleExclamation} className="text-red-500 absolute top-[12px] right-[10px]" />
-        //                         </div>
-        //                     )}
-        //                 </div>
-
-                        
-
-        //                 {/* <InputComponent
-        //                     type='text'
-        //                     placeholder='Full Name'
-        //                     name="fullName"
-        //                     value={formValues.fullName}
-        //                     handleChange={handleChange}
-        //                     error={errors.fullName}
-        //                 />
-        //                 <InputComponent
-        //                     type='email'
-        //                     placeholder='Email'
-        //                     name="email"
-        //                     value={formValues.email}
-        //                     handleChange={handleChange}
-        //                     error={errors.email}
-        //                 />
-        //                 <InputComponent
-        //                     type='password'
-        //                     placeholder='Password'
-        //                     name="password"
-        //                     value={formValues.password}
-        //                     handleChange={handleChange}
-        //                     error={errors.password}
-        //                 />
-        //                 <InputComponent
-        //                     type='password'
-        //                     placeholder='Confirm Password'
-        //                     name="confirmPassword"
-        //                     value={formValues.confirmPassword}
-        //                     handleChange={handleChange}
-        //                     error={errors.confirmPassword}
-        //                 /> */}
-
-        //                 <div>
-        //                     <button className='bg-blue-700 uppercase text-base text-white btn btn-block  mt-2 hover:bg-slate-800' /*disabled={loading}*/>
-        //                         Create User
-        //                         {/* {loading ? <span className='loading loading-spinner'></span> : "Sign Up"} */}
-        //                     </button>
-        //                 </div>
-
-        //                 {/* <button className=" bg-blue-700 text-white rounded-lg px-4 py-2 uppercase text-sm font-semibold w-full mb-2" type="submit">Create User</button> */}
-        //                 <span className="text-black text-xs uppercase">already have an account? {' '}<Link to="/" className="text-blue-600 hover:underline">Login</Link></span>
-        //             </form>
-        //         </div>
-        //     </div>
-
-        // </div>

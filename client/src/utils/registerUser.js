@@ -1,19 +1,39 @@
 import axios from 'axios'
 const endpoint = 'http://localhost:3000/api/auth/signup'
+import validate from './validate'
+import errorNotification from './errorNotification'
 
 const registerUser = async(values) => {
-    try {
-        const {fullName, email, password} = values
-        const response = await axios.post(endpoint, {
-            fullName, email, password
-        })
+
+    const submit = true;
+    const newErrors = validate(values, submit);
+    const {fullName, email, password} = values
+
+try {
+        if (Object.keys(newErrors).length === 0) {
     
-        const data = await response.data;
-        return data;
+            const response = await axios.post(endpoint, {
+                fullName, email, password
+            })
         
-    } catch (error) {
-        console.log(error.message)
-    }
+            const data = await response.data;
+    
+            if(data){
+                if (data.registration) {
+                    errorNotification(data.msg)
+                    return null;
+                } else {
+                    errorNotification(data.msg)
+                }
+            }
+        } else {
+            return newErrors;
+        }
+} catch (error) {
+    console.log(error.message)
+    
+}
+
 
 }
 
