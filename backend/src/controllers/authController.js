@@ -30,7 +30,7 @@ export const signUp = async (fullName, email, password)=> {
             email: savedUser.email
         },
         registration: true,
-        msg: 'Created user',
+        msg: 'Registration completed',
         token
     }
 }
@@ -38,9 +38,9 @@ export const signUp = async (fullName, email, password)=> {
 export const signIn = async (email, password) => {
 
     const userFound = await User.findOne({email})
-    if(!userFound) throw Error('Invalid email or password')
+    if(!userFound) return { isLogged: false, msg: 'Invalid email or password'}
     const macthPassword = await User.comparePassword(password, userFound.password)
-    if(!macthPassword) throw Error('Invalid email or password')
+    if(!macthPassword) return { isLogged: false, msg: 'Invalid email or password'}
     const token = jwt.sign({id: userFound._id}, process.env.JWT_SECRET, { expiresIn: '24h'})
 
     return {
@@ -49,6 +49,8 @@ export const signIn = async (email, password) => {
             fullName: userFound.fullName,
             email: userFound.email
         },
+        isLogged: true,
+        msg: 'Successfully logged in',
         token
     }
 

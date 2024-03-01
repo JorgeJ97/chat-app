@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
+
 const authUser = JSON.parse(window.localStorage.getItem('user')) || null;
 
 

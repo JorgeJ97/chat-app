@@ -1,11 +1,17 @@
 import { useState } from "react"
 import { successNotification, errorNotification } from "../utils/notifications";
+import axios from 'axios'
 import validate from "../utils/validate";
+import useAuth from "./useAuth";
+
+const endpoint = 'http://localhost:3000/api/auth/signup'
 
 
 const useRegister = () => {
 
     const [loading, setLoading] = useState(false)
+    const {setUser} = useAuth();
+
 
     const registerUser = async (values) => {
 
@@ -26,7 +32,9 @@ const useRegister = () => {
 
                 if (data) {
                     if (data.registration) {
-                        successNotification(data.msg)
+                        successNotification(data.msg);
+                        updateLocalStorage(data.user);
+                        setUser(data.user)
                         return null;
                     } else {
                         errorNotification(data.msg)
@@ -37,7 +45,7 @@ const useRegister = () => {
             }
         } catch (error) {
             console.log(error.message);
-            errorNotification(error.message)
+            errorNotification('Internal server error')
 
         } finally {
             setLoading(false);
@@ -51,3 +59,8 @@ const useRegister = () => {
 }
 
 export default useRegister;
+
+
+export function updateLocalStorage (data) {
+    window.localStorage.setItem('user', JSON.stringify(data));
+}

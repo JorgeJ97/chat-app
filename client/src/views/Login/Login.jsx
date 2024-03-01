@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import loginUser from '../../utils/loginUser'
+import useLogin from '../../hooks/useLogin'
+import { errorNotification, successNotification } from '../../utils/notifications'
 
 const Login = () => {
 
@@ -10,18 +12,20 @@ const Login = () => {
         password: ''
     })
 
+    const { loading, login } = useLogin()
+
     const handleChange = (e) => {
-        let name = e.target.name
-        let value = e.target.value
-        console.log({ [name]: value })
+        let name = e.target.name;
+        let value = e.target.value;
         setValues({ ...values, [name]: value })
 
     }
 
-
-
     const handleSubmit = (e) => {
-        e.prevenDefault()
+        e.preventDefault();
+        login(values);
+
+
 
     }
     return (
@@ -35,7 +39,7 @@ const Login = () => {
                         </h1>
                     </div>
 
-                    <form>
+                    <form onSubmit={(e) => handleSubmit(e)}>
 
                         <div className='mb-3 pb-5 relative flex items-center justify-center'>
                             <label className="input input-bordered flex items-center gap-2 w-full h-10">
@@ -64,7 +68,9 @@ const Login = () => {
                         </div>
 
                         <div className='flex justify-center items-center mb-2'>
-                            <button className='btn btn-block bg-blue-700 text-white text-lg hover:bg-blue-800'>Login</button>
+                            <button className='btn btn-block bg-blue-700 text-white text-lg hover:bg-blue-800' disabled={loading} >
+                                {loading ? <span className='loading loading-spinner'></span> : 'Login'}
+                            </button>
                         </div>
 
                         <span className='text-base text-white font-medium'
@@ -77,53 +83,6 @@ const Login = () => {
 
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-        // <div className={styles.container}>
-
-        // <div className={styles.login_container}>
-        //     <div className={styles.header}>
-        //         <h2>Login</h2>
-        //     </div>
-
-        //     <form className={styles.login_form} onSubmit={(e) => handleSubmit(e)}>
-
-        //         <div className={styles.form_control}>
-        //             <input
-        //              type="email"
-        //              placeholder='Email'
-        //              name='email'
-        //              value={values.email}
-        //              onChange={(e) => handleChange(e)}
-        //              />
-        //         </div>
-
-        //         <div className={styles.form_control}>
-        //             <input 
-        //             type="password"
-        //             placeholder='Password'
-        //             name='password'
-        //             value={values.password}
-        //             onChange={(e) => handleChange(e)}
-        //             />
-        //         </div>
-
-        //         <button type='submit'>Submit</button>
-        //         <br />
-        //         <span>You do not have an account? <Link to= '/register'> Create an account</Link></span>
-
-        //     </form>
-        // </div>
-
-        // </div>
-
     )
 
 }

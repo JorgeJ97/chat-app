@@ -29,6 +29,7 @@ authRouter.post('/signin', async (req, res) => {
         const {email, password} = req.body
 
         const response = await signIn(email, password)
+        const {user, isLogged, msg} = response;
         
         // Set cookies
         res.cookie('jwt', response.token, {
@@ -37,7 +38,7 @@ authRouter.post('/signin', async (req, res) => {
             sameSite: 'strict'
         })
 
-        res.status(200).json(response.user)
+        res.status(200).json({user, isLogged, msg})
         
     } catch (error) {
         res.status(400).json({error: error.message})
