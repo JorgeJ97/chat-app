@@ -1,7 +1,7 @@
 import axios from 'axios'
 const endpoint = 'http://localhost:3000/api/auth/signup'
 import validate from './validate'
-import errorNotification from './errorNotification'
+import { errorNotification, successNotification } from './notifications'
 
 const registerUser = async(values) => {
 
@@ -20,7 +20,7 @@ try {
     
             if(data){
                 if (data.registration) {
-                    errorNotification(data.msg)
+                    successNotification(data.msg)
                     return null;
                 } else {
                     errorNotification(data.msg)

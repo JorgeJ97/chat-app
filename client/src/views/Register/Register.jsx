@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import validate from '../../utils/validate';
-import registerUser from '../../utils/registerUser';
+// import registerUser from '../../utils/registerUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import errorNotification from '../../utils/errorNotification';
+import { errorNotification } from '../../utils/notifications';
+import useRegister from '../../hooks/useRegister';
 
 const Register = () => {
     const navigate = useNavigate();
+    const {loading, registerUser} = useRegister();
     
     const [formValues, setFormValues] = useState({
         fullName: '',
@@ -31,7 +33,7 @@ const Register = () => {
             const newErrors = await registerUser(formValues);
             if(newErrors) {
                 setErrors(newErrors);
-                errorNotification("Correctly complete all fields");
+                errorNotification("Please complete all fields correctly");
             }
             else navigate('/');
 
