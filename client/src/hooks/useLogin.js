@@ -4,7 +4,7 @@ import { errorNotification, successNotification } from "../utils/notifications";
 import { updateLocalStorage } from "./useRegister";
 import useAuth from "./useAuth";
 
-const loginEndPoint = 'http://localhost:3000/api/auth/signin'
+const loginEndPoint = '/api/auth/signin'
 
 
 const useLogin = () => {
@@ -19,6 +19,7 @@ const useLogin = () => {
             if(password === '' || email === '') return errorNotification('Please fill out all the fields');
             const response = await axios.post(loginEndPoint, values);
             const data = await response.data;
+            console.log(response)
             if(data.isLogged){
                 updateLocalStorage(data.user);
                 setUser(data.user);

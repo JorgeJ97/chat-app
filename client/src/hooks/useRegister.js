@@ -4,7 +4,7 @@ import axios from 'axios'
 import validate from "../utils/validate";
 import useAuth from "./useAuth";
 
-const endpoint = 'http://localhost:3000/api/auth/signup'
+const endpoint = '/api/auth/signup'
 
 
 const useRegister = () => {

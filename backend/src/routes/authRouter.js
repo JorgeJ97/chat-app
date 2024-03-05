@@ -11,10 +11,12 @@ authRouter.post('/signup', async (req, res) => {
         
         // Set cookies
         res.cookie('jwt',token,{
+            maxAge: 15 * 24 * 60 * 60 * 1000,
             httpOnly: true, 
-            secure: process.env.NODE_ENV !== 'development', 
+            secure: process.env.NODE_ENV !== "development", 
             sameSite: 'strict'
-        })
+        }
+        )
 
         res.status(201).json({user, registration, msg})
         
@@ -33,10 +35,12 @@ authRouter.post('/signin', async (req, res) => {
         
         // Set cookies
         res.cookie('jwt', response.token, {
+            maxAge: 15 * 24 * 60 * 60 * 1000,
             httpOnly: true,
-            secure: process.env.NODE_ENV !== 'development', 
+            secure: process.env.NODE_ENV !== "development", 
             sameSite: 'strict'
-        })
+        }
+        )
 
         res.status(200).json({user, isLogged, msg})
         

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { updateLocalStorage } from "./useRegister"
 import useAuth from "./useAuth";
 
-const endpoint = 'http://localhost:3000/api/auth/logout'
+const endpoint = '/api/auth/logout'
 
 const useLogout = () => {
     const [loading, setLoading] = useState(false);

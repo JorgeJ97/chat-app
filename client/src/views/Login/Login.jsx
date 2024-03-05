@@ -21,11 +21,9 @@ const Login = () => {
 
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        login(values);
-
-
+        await login(values);
 
     }
     return (
