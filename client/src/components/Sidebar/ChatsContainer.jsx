@@ -5,8 +5,8 @@ import Chat from "./Chat";
 const ChatsContainer = () => {
     const { loading, chats } = useGetUsers();
     return (
-        <div className="flex flex-col overflow-auto">
-            {chats?.map(chat => {
+        <div className=" mb-2 flex flex-col overflow-auto">
+            {chats?.map((chat) => {
                 return (
                     <Chat 
                     key={chat._id}

@@ -1,9 +1,6 @@
-
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import loginUser from '../../utils/loginUser'
-import useLogin from '../../hooks/useLogin'
-import { errorNotification, successNotification } from '../../utils/notifications'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
 

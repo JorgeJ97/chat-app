@@ -1,16 +1,18 @@
+import useChatContext from "../../hooks/useChatContext";
 
-const Chat = ({id, fullName, image}) => {
-    let initials = ''
-
-    const nameArray = fullName.split(' ');
-    if(nameArray.length >= 2){
-        initials = nameArray[0].charAt(0) + nameArray[1].charAt(0);
-    }else initials = nameArray[0].charAt(0) + nameArray[0].charAt(1);
-
+const Chat = ({id, fullName}) => {
+    let initials = getInitials(fullName);
+    const {selectedChat, setSelectedChat} = useChatContext();
+    const isSelected = selectedChat === id;
+    const handleClick = (id) => {
+        setSelectedChat(id)
+    }
 
     return (
         <div>
-            <div className="flex items-center gap-2 hover:bg-zinc-700 rounded px-2 py-1 cursor-pointer">
+            <div className={`flex items-center gap-2 hover:bg-zinc-700 rounded px-2 py-1 cursor-pointer ${isSelected ? "bg-zinc-700" : ""}`}
+            onClick={() => handleClick(id)}
+            >
 
                 <div className="avatar online placeholder">
                     <div className="bg-neutral text-neutral-content rounded-full w-16">
@@ -26,12 +28,21 @@ const Chat = ({id, fullName, image}) => {
                 </div>
 
             </div>
-
-            <div className="divider my-0 py-0 h-1"></div>
-
         </div>
     )
 
 };
 
 export default Chat;
+
+function getInitials(fullName) {
+    let initials = ''
+
+    const nameArray = fullName.split(' ');
+    if(nameArray.length >= 2){
+        initials = nameArray[0].charAt(0) + nameArray[1].charAt(0);
+    }else initials = nameArray[0].charAt(0) + nameArray[0].charAt(1);
+
+    return initials;
+
+}
