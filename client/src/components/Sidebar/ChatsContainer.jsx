@@ -3,16 +3,14 @@ import Chat from "./Chat";
 
 
 const ChatsContainer = () => {
-    const { loading, chats } = useGetUsers();
+    const { loading, chatUsers } = useGetUsers();
     return (
         <div className=" mb-2 flex flex-col overflow-auto">
-            {chats?.map((chat) => {
+            {chatUsers?.map((chatUser) => {
                 return (
                     <Chat 
-                    key={chat._id}
-                    id = {chat._id}
-                    fullName = {chat.fullName} 
-                    image = {chat.image}
+                    key={chatUser._id}
+                    chatUser = {chatUser}
                     />
                 )
             })}

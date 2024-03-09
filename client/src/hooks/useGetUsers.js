@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
-import { errorNotification, successNotification } from "../utils/notifications";
+import { errorNotification} from "../utils/notifications";
 import useLogout from "./useLogout";
 const getUsersEndpoint = '/api/users'
 
 
 const useGetUsers = () => {
     const [loading, setLoading] = useState(false);
-    const [chats, setChats] = useState([]);
+    const [chatUsers, setChatUsers] = useState([]);
     const { logout } = useLogout();
 
 
@@ -20,10 +19,10 @@ const useGetUsers = () => {
                 const response = await fetch(getUsersEndpoint);
                 const data = await response.json();
                 if (data.error) throw Error(data.error)
-                setChats(data);
+                setChatUsers(data);
             } catch (error) {
                 console.log(error.message)
-                if(error.message === 'Unauthorized, no token provided' || 'Unauthorized, invalid token') {
+                if(error.message === 'Unauthorized, no token provided' || error.message === 'Unauthorized, invalid token') {
                     errorNotification('Session expired, log in again');
                     return logout();
                 }
@@ -35,7 +34,7 @@ const useGetUsers = () => {
         getUsers();
 
     }, [])
-    return { loading, chats };
+    return { loading, chatUsers };
 };
 
 export default useGetUsers;

@@ -1,17 +1,21 @@
 import useChatContext from "../../hooks/useChatContext";
+import getInitials from "../../utils/getInitials";
 
-const Chat = ({id, fullName}) => {
-    let initials = getInitials(fullName);
+const Chat = ({chatUser}) => {
+
+    const initials = getInitials(chatUser.fullName);
     const {selectedChat, setSelectedChat} = useChatContext();
-    const isSelected = selectedChat === id;
-    const handleClick = (id) => {
-        setSelectedChat(id)
-    }
+    const isSelected = selectedChat?._id === chatUser._id;
+
+
+    const handleClick = (chatUser) => {
+        setSelectedChat(chatUser);
+    };
 
     return (
         <div>
             <div className={`flex items-center gap-2 hover:bg-zinc-700 rounded px-2 py-1 cursor-pointer ${isSelected ? "bg-zinc-700" : ""}`}
-            onClick={() => handleClick(id)}
+            onClick={() => handleClick(chatUser)}
             >
 
                 <div className="avatar online placeholder">
@@ -22,7 +26,7 @@ const Chat = ({id, fullName}) => {
 
                 <div className="flex flex-col flex-1">
                     <div className="flex gap-3 justify-between">
-                        <p className=" font-bold text-white">{fullName}</p>
+                        <p className=" font-bold text-white">{chatUser.fullName}</p>
                     </div>
 
                 </div>
@@ -34,15 +38,3 @@ const Chat = ({id, fullName}) => {
 };
 
 export default Chat;
-
-function getInitials(fullName) {
-    let initials = ''
-
-    const nameArray = fullName.split(' ');
-    if(nameArray.length >= 2){
-        initials = nameArray[0].charAt(0) + nameArray[1].charAt(0);
-    }else initials = nameArray[0].charAt(0) + nameArray[0].charAt(1);
-
-    return initials;
-
-}
