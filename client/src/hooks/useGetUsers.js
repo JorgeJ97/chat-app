@@ -27,6 +27,7 @@ const useGetUsers = () => {
                     return logout();
                 }
                 errorNotification('Internal server error');
+                return logout();
             } finally {
                 setLoading(false);
             }

@@ -11,7 +11,7 @@ const useGetMessages = () => {
     useEffect(() => {
 
         const getMessages = async () => {
-    
+
             try {
                 const response = await fetch(`${getMessagesEndpoint}${selectedChat?._id}`);
                 const data = await response.json();
@@ -24,6 +24,8 @@ const useGetMessages = () => {
                     return logout();
                 }
                 errorNotification('Internal server error');
+            } finally{
+                setLoading(false);
             }
         }
         if(selectedChat?._id) getMessages();
