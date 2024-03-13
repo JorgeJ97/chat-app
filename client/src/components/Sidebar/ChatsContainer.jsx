@@ -1,9 +1,11 @@
+import useChatContext from "../../hooks/useChatContext";
 import useGetUsers from "../../hooks/useGetUsers";
 import Chat from "./Chat";
 
 
 const ChatsContainer = () => {
-    const { loading, chatUsers } = useGetUsers();
+    const { loading } = useGetUsers();
+    const {chatUsers} = useChatContext();
     return (
         <div className=" mb-2 flex flex-col overflow-auto">
             {chatUsers?.map((chatUser) => {

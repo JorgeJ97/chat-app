@@ -15,7 +15,7 @@ const Message = ({message}) => {
     let initials = isReceiver ? toInitials : userInitials;
 
     return (
-        <div className={`chat ${!isReceiver ? "chat-end" : "chat-start"}`}>
+        <div className={`chat py-2.5 ${!isReceiver ? "chat-end" : "chat-start"}`}>
         <div className="chat-image avatar placeholder">
             <div className="bg-neutral text-neutral-content rounded-full w-10">
                 <span className="text-sm">{initials}</span>
