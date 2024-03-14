@@ -25,7 +25,7 @@ const useGetMessages = () => {
                 }
                 errorNotification('Internal server error');
             } finally{
-                setLoading(false);
+                // setLoading(false);
             }
         }
         if(selectedChat?._id) getMessages();

@@ -4,13 +4,16 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { ContextProvider } from './context/Context.jsx'
+import { SocketContextProvider } from './context/SocketContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
     <BrowserRouter>
         <ContextProvider>
-            <App />
+            <SocketContextProvider>
+                <App />
+            </SocketContextProvider>
         </ContextProvider>
     </BrowserRouter>
 );
