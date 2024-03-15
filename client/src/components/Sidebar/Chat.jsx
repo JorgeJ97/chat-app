@@ -1,11 +1,16 @@
+import { useSocket } from "../../context/SocketContext";
 import useChatContext from "../../hooks/useChatContext";
 import getInitials from "../../utils/getInitials";
+import listenSocket from "../../utils/listenSocket";
+import { useEffect } from "react";
 
 const Chat = ({chatUser}) => {
 
     const initials = getInitials(chatUser.fullName);
     const {selectedChat, setSelectedChat} = useChatContext();
     const isSelected = selectedChat?._id === chatUser._id;
+    const {onlineUsers} = useSocket();
+    const isOnline = onlineUsers.includes(chatUser._id);
 
 
     const handleClick = (chatUser) => {
@@ -18,7 +23,7 @@ const Chat = ({chatUser}) => {
             onClick={() => handleClick(chatUser)}
             >
 
-                <div className="avatar online placeholder">
+                <div className={`avatar ${isOnline ? "online" : ""} placeholder`}>
                     <div className="bg-neutral text-neutral-content rounded-full w-16">
                         <span className="text-base">{initials.toUpperCase()}</span>
                     </div>

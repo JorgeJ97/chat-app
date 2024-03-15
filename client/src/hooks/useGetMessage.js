@@ -7,11 +7,12 @@ const getMessagesEndpoint = 'api/message/'
 const useGetMessages = () => {
     const { messages, setMessages, selectedChat } = useChatContext();
     const { logout } = useLogout();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
 
         const getMessages = async () => {
-
+            setLoading(true);
             try {
                 const response = await fetch(`${getMessagesEndpoint}${selectedChat?._id}`);
                 const data = await response.json();
@@ -25,14 +26,14 @@ const useGetMessages = () => {
                 }
                 errorNotification('Internal server error');
             } finally{
-                // setLoading(false);
+                setLoading(false);
             }
         }
         if(selectedChat?._id) getMessages();
 
     }, [selectedChat?._id, setMessages]);
 
-    return { messages };
+    return { messages, loading };
 
 }
 

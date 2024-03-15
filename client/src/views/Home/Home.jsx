@@ -1,8 +1,10 @@
 import MessagesContainer from "../../components/Messages/MessagesContainer.jsx";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
+import listenSocket from "../../utils/listenSocket.js";
 
 
 const Home = () => {
+    listenSocket();
 
     return (
         <div>

@@ -2,6 +2,9 @@ import express from 'express'
 import {Server} from 'socket.io';
 import {createServer} from 'node:http';
 
+const ONLINE_USERS = 'online_users';
+const CHAT_MESSAGE = 'chat_message'
+
 
 const app = express();
 const server = createServer(app)
@@ -16,27 +19,38 @@ const io = new Server(server, {
     }
 })
 
+const onlineUsers = {};
+
+export function getOnlineUser (receiverId) {
+    return onlineUsers[receiverId];
+};
 
 // Runs when client connects
 io.on('connection', (socket) => {
-    console.log('an user has conected')
+    console.log('an user has conected',socket.id)
+    const userId = socket.handshake.query.userId;
+    if(userId != "undefined") onlineUsers[userId] = socket.id;
+    io.emit(ONLINE_USERS, Object.keys(onlineUsers));
 
 // Runs when client disconnects
     socket.on('disconnect', () =>{
-        io.emit('message', 'A user has left the chat')
-        console.log('an user has disconnected')
+        console.log('an user has disconnected', socket.id);
+        delete onlineUsers[userId];
+        io.emit(ONLINE_USERS, Object.keys(onlineUsers));
     })
+
+
+
+//------------------ For group chat functionality ---------------
 
 // Broadcast when user connects
     socket.broadcast.emit('message', 'A user has joined the chat')
 
 // Listen for chat_message
-    socket.on('chat_message', (data)=> {
-        io.emit('chat_message', data) // emit chat_message for all clients
-
-
+    socket.on(CHAT_MESSAGE, (data)=> {
+        io.emit(CHAT_MESSAGE, data) // emit chat_message for all clients
     })
-
+// --------------------------------------------------------------
 })
 
 export {io, app, server}

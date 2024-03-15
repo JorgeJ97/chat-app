@@ -6,7 +6,7 @@ function getInitials(fullName) {
         initials = nameArray[0][0] + nameArray[1][0];
     }else initials = nameArray[0][0] + nameArray[0][1];
 
-    return initials;
+    return initials.toUpperCase();
 
 };
 

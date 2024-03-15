@@ -1,5 +1,6 @@
 import Chat from '../models/chatModel.js'
 import Message from '../models/messageModel.js'
+import { getOnlineUser, io } from '../socket/socket.js'
 
 export const sendMessage = async (senderId, receiverId, message) => {
 
@@ -26,6 +27,12 @@ export const sendMessage = async (senderId, receiverId, message) => {
     
     
     await Promise.all([chat.save(), newMessage.save()]);
+
+    const onlineUser = getOnlineUser(receiverId); // socket.id
+
+    if(onlineUser){
+        io.to(onlineUser).emit('new_message', newMessage);
+    }
     
     return newMessage;
 
