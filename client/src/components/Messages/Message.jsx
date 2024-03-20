@@ -25,7 +25,7 @@ const Message = ({ message }) => {
                     </div>
                 </div>
 
-                <div className={`chat-bubble text-white ${shake} ${!isReceiver ? "bg-blue-500" : "bg-zinc-800"}`}>
+                <div className={`chat-bubble overflow-y-auto overflow-x-hidden break-all text-white ${shake} ${!isReceiver ? "bg-blue-500" : "bg-zinc-800"}`}>
                     {message.message}
                 </div>
                 <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">{time}</div>

@@ -18,7 +18,7 @@ const MessagesContainer = () => {
     }, [setSelectedChat])
 
     return (
-        <div className="flex flex-col md:min-w-[450px]">
+        <div className="flex flex-col md:min-w-[450px] max-w-[480px]">
             {!selectedChat ? (
                 <div className="flex items-center justify-center w-full h-full">
                     <div className="flex items-center flex-col gap-2 font-semibold text-white md:text-lg sm:text-base text-center">
