@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { io } from 'socket.io-client'
 
-const productionUrl = 'https://chat-app-production-c4pw.onrender.com/'
+const productionUrl = 'https://chat-app-7cjy.onrender.com'
 
 export const SocketContext = createContext();
 
