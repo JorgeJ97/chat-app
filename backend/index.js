@@ -3,6 +3,7 @@ import path from 'path';
 import morgan from 'morgan';
 import router from './src/routes/index.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { app, server } from './src/socket/socket.js';
 import mongoConnection from './src/database.js';
 
@@ -15,13 +16,26 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
+const corsOptions = {
+  origin: 'https://chat-app-7cjy.onrender.com',
+  credentials: true 
+};
+app.use(cors(corsOptions));
+
+
+
+app.use((_req, res, next) => {
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 app.use('/api', router);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 
 
-app.get('*', (_req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
