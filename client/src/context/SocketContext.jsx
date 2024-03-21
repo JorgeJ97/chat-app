@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { io } from 'socket.io-client'
 
+const productionUrl = 'https://chat-app-production-c4pw.onrender.com/'
+
 export const SocketContext = createContext();
 
 export const useSocket = () => {
@@ -17,7 +19,7 @@ export const SocketContextProvider = ({ children }) => {
     useEffect(() => {
         
         if (user) {
-            const socket = io('http://localhost:3000', {
+            const socket = io(productionUrl, {
                 query: {
                     userId: user.id
                 }
