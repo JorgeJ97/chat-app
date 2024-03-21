@@ -20,7 +20,7 @@ const SearchBar = () => {
 
     return (
         <form className="flex items-center gap-2 mt-5 mx-5">
-            <input className="input input-bordered rounded-full"
+            <input className="input input-bordered rounded-full  bg-gray-800 focus:border-gray-700 focus:ring-gray-500 text-white"
                 type="text"
                 placeholder="Search"
                 value={searchValue}

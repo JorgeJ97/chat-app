@@ -19,7 +19,7 @@ const MessageInput = () => {
         <form className='px-4 my-3' onSubmit={(e) => handleSubmit(e)}>
             <div className="relative flex">
 
-                <input className=" input input-bordered rounded-full w-[85%] py-2.5 px-10 text-white"
+                <input className="input input-bordered rounded-full w-[85%] py-2.5 px-10 text-white bg-gray-800 focus:border-gray-700 focus:ring-gray-500"
                     type="text"
                     placeholder="Message"
                     value={messageinput}

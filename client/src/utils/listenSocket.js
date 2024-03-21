@@ -17,7 +17,6 @@ const listenSocket = () => {
             const notification = new Audio(sound);
             notification.play();
             setMessages([...messages, newMessage]);
-            console.log("message", newMessage)
         })
         return () => socket?.off("new_message");
     
