@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { io } from 'socket.io-client'
 
-const productionUrl = 'https://chat-app-7cjy.onrender.com'
+const SERVER_URL = import.meta.env.VITE_REACT_APP_ENV === 'develop' ? 'http://localhost:3000': 'https://chat-app-7cjy.onrender.com'
 
 export const SocketContext = createContext();
 
@@ -19,7 +19,7 @@ export const SocketContextProvider = ({ children }) => {
     useEffect(() => {
         
         if (user) {
-            const socket = io(productionUrl, {
+            const socket = io(SERVER_URL, {
                 query: {
                     userId: user.id
                 }

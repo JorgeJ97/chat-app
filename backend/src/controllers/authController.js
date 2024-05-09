@@ -1,6 +1,7 @@
 
 import User from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
+import { io } from '../socket/socket.js'
 
 export const signUp = async (fullName, email, password)=> {
 
@@ -19,9 +20,11 @@ export const signUp = async (fullName, email, password)=> {
         fullName,
         email,
         password: await User.encryptPassword(password)
-    })
-    const savedUser = await user.save()
-    const token = jwt.sign({id: savedUser._id}, process.env.JWT_SECRET, { expiresIn: '24h'} )
+    });
+    const savedUser = await user.save();
+    const token = jwt.sign({id: savedUser._id}, process.env.JWT_SECRET, { expiresIn: '24h'} );
+
+    io.emit("new_user", true);
 
     return {
         user: {
@@ -32,8 +35,8 @@ export const signUp = async (fullName, email, password)=> {
         registration: true,
         msg: 'Registration completed',
         token
-    }
-}
+    };
+};
 
 export const signIn = async (email, password) => {
 
