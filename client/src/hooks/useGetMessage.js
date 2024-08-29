@@ -5,7 +5,7 @@ import useLogout from "./useLogout";
 const getMessagesEndpoint = 'api/message/'
 
 const useGetMessages = () => {
-    const { messages, setMessages, selectedChat } = useChatContext();
+    const { messages, setMessages, selectedChat, setConversations } = useChatContext();
     const { logout } = useLogout();
     const [loading, setLoading] = useState(false);
 
@@ -17,19 +17,31 @@ const useGetMessages = () => {
                 const response = await fetch(`${getMessagesEndpoint}${selectedChat?._id}`);
                 const data = await response.json();
                 if (data.error) throw Error(data.error);
-                setMessages(data);
+                setMessages(data?.messages);
+                setConversations((prevChats) => {
+                    const newChats = prevChats.map(chat => {
+                        if(chat?._id.toString() === data?._id.toString()){
+                            return {
+                                ...chat,
+                                unread: data?.unread
+                            }
+                        }
+                        return chat;
+                    })
+                    return newChats;
+                });
             } catch (error) {
                 console.log(error.message)
-                if (error.message === 'Unauthorized, no token provided' || error.message === 'Unauthorized, invalid token') {
+                if (error.message === 'Unauthorized, no token provided' || error.message === 'Unauthorized, invalid token' || error.message === 'User not found') {
                     errorNotification('Session expired, log in again');
                     return logout();
                 }
                 errorNotification('Internal server error');
-            } finally{
+            } finally {
                 setLoading(false);
             }
         }
-        if(selectedChat?._id) getMessages();
+        if (selectedChat?._id) getMessages();
 
     }, [selectedChat?._id, setMessages]);
 

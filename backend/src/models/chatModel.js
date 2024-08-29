@@ -14,8 +14,23 @@ const chatSchema = new Schema({
             ref: 'Message',
             default: []
         }
-    ]
+    ],
 
-}, {timestamps: true})
+    unread: {
+        type: Map,
+        of: Number,
+        default: {}
+    },
+
+    lastMessage : {
+        type: Schema.Types.ObjectId,
+        ref: 'Message'
+    }
+
+
+}, {timestamps: true});
+
+chatSchema.index({ participants: 1 });
+chatSchema.index({ lastMessage: 1 });
 
 export default model('Chat', chatSchema)

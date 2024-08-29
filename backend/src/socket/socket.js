@@ -1,6 +1,7 @@
 import express from 'express'
 import {Server} from 'socket.io';
 import {createServer} from 'node:http';
+import Chat from '../models/chatModel.js'
 
 const ONLINE_USERS = 'online_users';
 const CHAT_MESSAGE = 'chat_message'
@@ -37,6 +38,17 @@ io.on('connection', (socket) => {
         console.log('an user has disconnected', socket.id);
         delete onlineUsers[userId];
         io.emit(ONLINE_USERS, Object.keys(onlineUsers));
+    })
+// Mark messages as read while a chat is open
+    socket.on("mark_as_read", async ({ chatId, userId }) => {
+        try {
+            await Chat.findByIdAndUpdate(chatId, { $set: { [`unread.${userId}`]: 0 } });
+            
+        } catch (error) {
+            console.error("Error marking chat as read:", error);
+            
+        }
+
     })
 
 

@@ -13,16 +13,18 @@ function App() {
 
   return (
 
-    <div className='flex items-center justify-center h-screen bg-zinc-800'>
+    <div>
       <Toaster />
+      {/* <Routes>
+        <Route path='/login' element={user ? <Navigate to= '/'/> : <Login />} />
+        <Route path='/register' element={user ? <Navigate to= '/'/> : <Register />} />
+        <Route path='/' element={user ? <Home /> : <Navigate to= '/login'/> } />
+        <Route path='*' element={<Navigate to="/" />} />
+      </Routes> */}
       <Routes>
-        <Route path='/' element={user ? <Navigate to= '/home'/> : <Login />} />
-        <Route path='/register' element={user ? <Navigate to= '/home'/> : <Register />} />
-        <Route path='/home' element={user ? <Home /> : <Navigate to= '/'/> } />
-
-        {/* <Route path = '/chat' element = {<Chat /> } /> */}
-
-
+        <Route path='/login' element={user ? <Navigate to= '/'/> : <Login />} />
+        <Route path='/register' element={user ? <Navigate to= '/'/> : <Register />} />
+        <Route path='/*' element={user ? <Home /> : <Navigate to= '/login'/> } />
       </Routes>
 
 

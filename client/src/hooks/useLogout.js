@@ -1,6 +1,5 @@
 import { useState } from "react"
 import axios from 'axios'
-import { updateLocalStorage } from "./useRegister"
 import useAuth from "./useAuth";
 
 const endpoint = '/api/auth/logout'

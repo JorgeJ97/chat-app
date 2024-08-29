@@ -16,11 +16,33 @@ const messageSchema = new Schema({
 
     message: {
         type: String,
-        require: true,
 
+    },
+
+    imageUrl : {
+        type: String,
+        default: ""
+    },
+
+    videoUrl: {
+        type: String,
+        default: ""
+    },
+
+    docUrl: {
+        type: String,
+        default: ''
+    },
+
+    isRead: {
+        type: Boolean,
+        default: false
     }
 
 
-}, {timestamps: true})
+}, {timestamps: true});
+
+/*Add composite index*/
+messageSchema.index({ senderId: 1, receiverId: 1, isRead: 1 });
 
 export default model('Message', messageSchema)

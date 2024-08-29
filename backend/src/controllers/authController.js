@@ -13,9 +13,6 @@ export const signUp = async (fullName, email, password)=> {
         }
         }
 
-    const nameArray = fullName.split(' ');
-    
-
     const user = new User({
         fullName,
         email,
@@ -30,7 +27,8 @@ export const signUp = async (fullName, email, password)=> {
         user: {
             id: savedUser._id,
             fullName: savedUser.fullName,
-            email: savedUser.email
+            email: savedUser.email,
+            image: savedUser.image
         },
         registration: true,
         msg: 'Registration completed',
@@ -50,7 +48,8 @@ export const signIn = async (email, password) => {
         user: {
             id: userFound._id,
             fullName: userFound.fullName,
-            email: userFound.email
+            email: userFound.email,
+            image: userFound.image
         },
         isLogged: true,
         msg: 'Successfully logged in',

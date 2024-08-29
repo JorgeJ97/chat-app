@@ -12,7 +12,7 @@ export const ContextProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
     const [chatUsers, setChatUsers] = useState([]);
-    const [allChatUsers, setAllChatUsers] = useState([]);
+    const [conversations, setConversations] = useState([]);
 
 
     return (
@@ -21,7 +21,7 @@ export const ContextProvider = ({ children }) => {
                 messages, setMessages,
                 selectedChat, setSelectedChat,
                 chatUsers, setChatUsers,
-                allChatUsers, setAllChatUsers
+                conversations, setConversations
             }}>
                 {children}
             </ChatContext.Provider>

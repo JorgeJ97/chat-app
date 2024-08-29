@@ -18,20 +18,10 @@ const userSchema = new Schema({
         required: true
     },
 
-    gender: {
-        type: String,
-        enum: ['male', 'female']
-    },
-
     image: {
         type: String,
         default: ''
     },
-
-    isOnline: {
-        type: String,
-        default: '0'
-    }
 }, {timestamps: true})
 
 
