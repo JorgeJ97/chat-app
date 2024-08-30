@@ -32,9 +32,9 @@ const Home = () => {
                 </Routes>
             </section>
 
-            <div className={`hidden justify-center items-center flex-col gap-2 bg-slate-100 ${!isHomePath ? '' : 'lg:flex'}`}>
+            <div className={`hidden justify-center items-center flex-col gap-2 bg-slate-50 ${!isHomePath ? '' : 'lg:flex'}`}>
                 <div>
-                    <img src={logo} alt="logo" width={300} />
+                    <img src={logo} alt="logo" width={250} />
                 </div>
                 <p className=" text-slate-600 mt-2 text-lg"> Select a user to send message</p>
             </div>
