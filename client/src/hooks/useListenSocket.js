@@ -24,6 +24,7 @@ const useListenSocket = () => {
             // Update chats
             setConversations((prevChats) => {
                 const newChats = prevChats.map(chat => {
+                    let isNewChat = false
                     if(chat._id.toString() === updatedChat._id.toString()){
                         if(selectedChat?._id && selectedChat?._id.toString() === chat.user?._id.toString()){
 
@@ -40,14 +41,14 @@ const useListenSocket = () => {
                     }
                     return chat;
                 })
-                return newChats;
+                return [...newChats, updatedChat ];
             });
         })
 
         socket?.on("new_chat", (newChat) => {
             setConversations((prevChats)=> {
                 return [...prevChats, newChat]
-            })
+            });
 
         })
 
