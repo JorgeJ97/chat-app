@@ -52,7 +52,7 @@ export const getUserChats = async (userId) => {
             $project: {
                 _id: 1,
                 unread: 1,
-                participants:  {
+                participants: {
                     $map: {
                         input: {
                             $filter: {
@@ -130,9 +130,11 @@ export const updateUserData = async (user, fullName, image) => {
         updateFields.image = image;
     }
 
-    await User.updateOne({ _id: user._id }, updateFields);
-
-    const updatedUser = await User.findById(user._id).select('-password');
+    const updatedUser = await User.findByIdAndUpdate(
+        user._id,
+        updateFields,
+        { new: true, select: '-password' }
+    );
 
     return {
         id: updatedUser._id,
