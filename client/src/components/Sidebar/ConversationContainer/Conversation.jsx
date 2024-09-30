@@ -12,7 +12,7 @@ const Conversation = ({ handleClick, selectedChat, conv }) => {
     return (
         <div key={conv?.user?._id} className="mx-1">
             <Link
-                className="flex items-center gap-2 py-3 px-2 hover:border hover:bg-slate-50 hover:border-blue-700"
+                className="flex items-center gap-2 py-3 px-2 hover:border hover:bg-slate-50 hover:border-blue-700 h-16"
                 to={`/${conv?.user?._id}`}
                 onClick={() => handleClick(conv?.user)} >
                 <Avatar
@@ -20,8 +20,8 @@ const Conversation = ({ handleClick, selectedChat, conv }) => {
                     image={conv?.user?.image}
                     fullName={conv?.user?.fullName}
                 />
-                <div>
-                    <h3 className="text-ellipsis line-clamp-1 text-slate-700 font-semibold text-base">{conv?.user?.fullName}</h3>
+                <div className="flex-1 min-w-0">
+                    <h3 className="truncate text-slate-700 font-semibold text-base">{conv?.user?.fullName}</h3>
                     <div>
                         <div>
                             {conv?.lastMessage?.imageUrl ?
@@ -37,7 +37,7 @@ const Conversation = ({ handleClick, selectedChat, conv }) => {
                                     </span>
 
                                 ) : (
-                                    <p className="text-sm">{`${user?.id === conv?.lastMessage?.senderId ? 'You:' : ''}`} {conv?.lastMessage?.message}</p>
+                                    <p className="text-sm truncate">{`${user?.id === conv?.lastMessage?.senderId ? 'You:' : ''}`} {conv?.lastMessage?.message}</p>
                                 )}
                         </div>
 

@@ -46,13 +46,16 @@ export const sendMessage = async (senderId, receiverId, message, imageUrl, video
 
 
     // Check if the user is online, if the user is online, send the message in real time
-    const receriverSocketId = getOnlineUser(receiverId);
+    const receiverSocketId = getOnlineUser(receiverId);
     const senderSocketId = getOnlineUser(senderId);
 
-    if (receriverSocketId) {
+    if (receiverSocketId) {
 
-        const chat = await getSingleChat(new mongoose.Types.ObjectId(receiverId), senderId);
-        io.to(receriverSocketId).emit('new_message', newMessage, chat);
+        const chatForReceiver = await getSingleChat(new mongoose.Types.ObjectId(receiverId), senderId);
+        io.to(receiverSocketId).emit('new_message', newMessage, chatForReceiver );
+        if(isNewChat){
+            io.to(receiverSocketId).emit('new_chat', chatForReceiver)
+        }
     }
 
     if (isNewChat) {

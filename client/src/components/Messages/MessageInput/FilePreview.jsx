@@ -3,7 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { BsEmojiGrin } from 'react-icons/bs';
 import { LuSendHorizonal } from "react-icons/lu";
 
-const FilePreview = ({ handleClosePreview, value, src, inputRef, handleOnChange, id, handleOpenEmoji, handleSubmit }) => {
+const FilePreview = ({ handleClosePreview, value, src, inputRef, handleOnChange, id, handleOpenEmoji, handleSubmit, loading }) => {
   return (
     <div className="fixed bg-gray-900 bg-opacity-40 p-2 z-10 w-full h-full inset-0 flex items-center justify-center">
 
@@ -43,9 +43,17 @@ const FilePreview = ({ handleClosePreview, value, src, inputRef, handleOnChange,
                 ref={src ? inputRef : null}
                 onChange={(e) => handleOnChange(e)}
               />
-              <button className="mx-2 text-slate-800  hover:text-blue-700">
-                <LuSendHorizonal size={24} />
-              </button>
+              {
+                loading ?
+                  (
+                    <div className=" loading loading-spinner"></div>
+                  ) : (
+                    <button className="mx-2 text-slate-800  hover:text-blue-700">
+                      <LuSendHorizonal size={24} />
+                    </button>
+
+                  )
+              }
             </form>
 
           </section>

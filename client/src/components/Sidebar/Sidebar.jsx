@@ -1,7 +1,8 @@
+// import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+// import { BsCheckAll } from "react-icons/bs";
 import React from "react";
 import LogoutButton from "./LogoutButton/LogoutButton";
 import SearchBar from "./SearchBar/SearchBar";
-import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaUserPlus } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
@@ -9,7 +10,6 @@ import EditUser from "./EditUser/EditUser";
 import Avatar from "../Avatar/Avatar";
 import useGetCoversations from "../../hooks/useGetConversations";
 import useChatContext from "../../hooks/useChatContext";
-// import { BsCheckAll } from "react-icons/bs";
 import ConversationsContainer from "./ConversationContainer/ConversationsContainer";
 
 
@@ -39,12 +39,7 @@ const Sidebar = () => {
     return (
         <div className="w-full h-full grid grid-cols-[48px,1fr] bg-white">
             <div className=" bg-zinc-800 w-12 h-full rounded-tr-lg rounded-br-lg py-5 flex flex-col justify-between" >
-                <div>
-                    <div className="  text-white w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-zinc-700 rounded"
-                        title="Chat">
-                        <IoChatbubbleEllipsesOutline size={25} />
-                    </div>
-
+                <div className="mt-[44px]">
                     <div className="  text-white w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-zinc-700 rounded"
                         title="Users"
                         onClick={() => setSearchOpen(!searchOpen)}>
@@ -67,7 +62,7 @@ const Sidebar = () => {
 
             <div className="w-full bg-white">
                 <div className="h-16 flex items-center">
-                    <h2 className="text-xl font-bold text-slate-700 p-4">Message</h2>
+                    <h2 className="text-xl font-bold text-slate-700 p-4">Messages</h2>
                 </div>
 
                 {/* Conversations */}
@@ -95,3 +90,11 @@ const Sidebar = () => {
 };
 
 export default React.memo(Sidebar);
+
+
+
+
+                    {/* <div className="  text-white w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-zinc-700 rounded"
+                        title="Chat">
+                        <IoChatbubbleEllipsesOutline size={25} />
+                    </div> */}

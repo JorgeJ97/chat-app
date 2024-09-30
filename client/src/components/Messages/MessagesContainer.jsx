@@ -4,7 +4,6 @@ import Avatar from "../Avatar/Avatar";
 import { useSocket } from "../../context/SocketContext";
 import useGetUsers from '../../hooks/useGetUsers';
 import { useParams } from "react-router-dom";
-import { HiDotsVertical } from "react-icons/hi";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import MessageInput from "./MessageInput/MessageInput";
@@ -58,12 +57,6 @@ const MessagesContainer = () => {
                         </p>
                     </div>
 
-                </div>
-                <div className=" text-slate-800 text-2xl ">
-                    <button className="">
-                        <HiDotsVertical />
-
-                    </button>
                 </div>
 
             </header>

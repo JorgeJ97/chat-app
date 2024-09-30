@@ -22,8 +22,8 @@ const MessageInput = () => {
             videoUrl: '',
             docUrl: ''
         });
-    const { sendMessage, loading } = useSendMessage();
-    // const [loading, setLoading] = useState(false);
+    const { sendMessage } = useSendMessage();
+    const [loading, setLoading] = useState(false);
     const inputRef = useRef(null);
     const [cursorPosition, setCursorPosition] = useState(null);
     const [openFilesUpload, setOpenFilesUpload] = useState(false);
@@ -50,6 +50,7 @@ const MessageInput = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
+        setLoading(true);
         const newMessage = {
             message: messageInput.message,
             imageUrl: '',
@@ -59,7 +60,6 @@ const MessageInput = () => {
 
         if (uploadFile?.image) {
             let response = await uploadFiles(uploadFile?.image);
-            console.log(response?.url)
             if (response?.url) {
                 newMessage.imageUrl = response?.url;
             }
@@ -98,6 +98,7 @@ const MessageInput = () => {
             docUrl: ''
         });
         setOpenEmoji(false);
+        setLoading(false);
     }
     // Open emojipicker
     const handleOpenEmoji = () => {
@@ -245,6 +246,7 @@ const MessageInput = () => {
                     id={'image'}
                     handleOpenEmoji={handleOpenEmoji}
                     handleSubmit={handleSubmit}
+                    loading={loading}
                 />
             }
             {
@@ -258,6 +260,7 @@ const MessageInput = () => {
                     id={'video'}
                     handleOpenEmoji={handleOpenEmoji}
                     handleSubmit={handleSubmit}
+                    loading={loading}
                 />
 
             }
