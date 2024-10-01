@@ -10,7 +10,7 @@ const Conversation = ({ handleClick, selectedChat, conv }) => {
 
 
     return (
-        <div key={conv?.user?._id} className="w-[244px] mx-1">
+        <div key={conv?.user?._id} className="lg:w-[244px] mx-1">
             
             <Link
                 className="flex items-center gap-2 py-3 px-2 hover:border hover:bg-slate-50 hover:border-blue-700 h-16"
@@ -21,7 +21,7 @@ const Conversation = ({ handleClick, selectedChat, conv }) => {
                     image={conv?.user?.image}
                     fullName={conv?.user?.fullName}
                 />
-                <div className="w-[100px]">
+                <div className="lg:w-[100px]">
                     <h3 className="truncate text-slate-700 font-semibold text-base">{conv?.user?.fullName}</h3>
                     <div className="flex items-center">
                         <div>
@@ -38,7 +38,7 @@ const Conversation = ({ handleClick, selectedChat, conv }) => {
                                     </span>
 
                                 ) : (
-                                    <p className="text-sm truncate max-w-[140px]">{`${user?.id === conv?.lastMessage?.senderId ? 'You:' : ''}`} {conv?.lastMessage?.message}</p>
+                                    <p className="text-sm truncate lg:max-w-[140px]">{`${user?.id === conv?.lastMessage?.senderId ? 'You:' : ''}`} {conv?.lastMessage?.message}</p>
                                 )}
                         </div>
 
