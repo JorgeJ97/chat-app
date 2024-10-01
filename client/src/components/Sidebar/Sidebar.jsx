@@ -14,7 +14,7 @@ import ConversationsContainer from "./ConversationContainer/ConversationsContain
 
 
 const Sidebar = () => {
-    const {  setSelectedChat } = useChatContext();
+    const { setSelectedChat } = useChatContext();
 
     const { getConversations } = useGetCoversations();
 
@@ -37,7 +37,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="w-full h-full grid grid-cols-[48px,1fr] bg-white">
+        <div className=" h-full grid grid-cols-[48px,252px] bg-white">
             <div className=" bg-zinc-800 w-12 h-full rounded-tr-lg rounded-br-lg py-5 flex flex-col justify-between" >
                 <div className="mt-[44px]">
                     <div className="  text-white w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-zinc-700 rounded"
@@ -67,7 +67,10 @@ const Sidebar = () => {
 
                 {/* Conversations */}
                 <div className="bg-slate-200 p-[0.5px]"></div>
+                <div className=" overflow-hidden">
+
                 <ConversationsContainer handleClick={handleClick} />
+                </div>
             </div>
 
 
@@ -94,7 +97,7 @@ export default React.memo(Sidebar);
 
 
 
-                    {/* <div className="  text-white w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-zinc-700 rounded"
+{/* <div className="  text-white w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-zinc-700 rounded"
                         title="Chat">
                         <IoChatbubbleEllipsesOutline size={25} />
                     </div> */}
