@@ -1,6 +1,6 @@
 # Chat en Tiempo Real
 
-Este es un proyecto de chat en tiempo real desarrollado con Node.js, Express, MongoDB, Cloudinary y Socket.IO en el backend, y con React, Tailwind CSS y Axios en el frontend.
+Este es un proyecto personal de chat en tiempo real que desarrollé con Node.js, Express, MongoDB, Cloudinary y Socket.IO en el backend, y con React, Tailwind CSS y Axios en el frontend.
 
 ## Características
 - Mensajería en tiempo real con WebSockets.
@@ -27,7 +27,13 @@ Este es un proyecto de chat en tiempo real desarrollado con Node.js, Express, Mo
 - Tailwind CSS
 - Axios para peticiones HTTP
 
-## Instalación y Configuración
+## Despliegue
+El proyecto está desplegado en **Render** y puedes acceder a la aplicación en el siguiente enlace:
+https://chat-app-7cjy.onrender.com/
+
+> ⚠ **Nota:** La aplicación puede tardar unos segundos en abrir si no se ha utilizado recientemente, ya que Render desactiva la instancia cuando no está en uso.
+
+## Instalación y Configuración para desarrollo
 
 ### Requisitos previos
 - Node.js y pnpm instalados
