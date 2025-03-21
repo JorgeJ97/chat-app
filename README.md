@@ -49,7 +49,7 @@ cd chat-app
 npm run build
 ```
 
-### Configuración del proyecto en entorno de desarrolo
+### Configuración del proyecto en entorno de desarrollo
 Crea un archivo `.env` en la raíz del backend y agrega las siguientes variables:
 ```env
 PORT=3000
@@ -75,8 +75,3 @@ El servidor se ejecutará en `http://localhost:3000` por defecto.
 - Utiliza emojis en tus conversaciones.
 - Ve el contador de mensajes no leídos.
 
-## Despliegue
-El proyecto está desplegado en **Render** y puedes acceder a la aplicación en el siguiente enlace:
-https://chat-app-7cjy.onrender.com/
-
-> ⚠ **Nota:** La aplicación puede tardar unos segundos en abrir si no se ha utilizado recientemente, ya que Render desactiva la instancia cuando no está en uso.
