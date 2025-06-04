@@ -2,6 +2,11 @@
 
 Este proyecto personal es un chat en tiempo real que desarrollé con Node.js, Express, MongoDB, Cloudinary y Socket.IO en el backend, y con React, Tailwind CSS y Axios en el frontend.
 
+![Vista principal del chat](./screenshots/view2.png)
+![Vista principal del chat](./screenshots/view1.png)
+![Vista principal del chat](./screenshots/phone-view1.png)
+![Vista principal del chat](./screenshots/phone-view3.jpeg)
+
 ## Características
 - Mensajería en tiempo real con WebSockets.
 - Soporte para imágenes, videos y documentos mediante Cloudinary.
