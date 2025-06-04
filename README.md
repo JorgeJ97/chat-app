@@ -41,7 +41,7 @@ https://chat-app-7cjy.onrender.com/
 ## Instalación y Configuración para desarrollo
 
 ### Requisitos previos
-- Node.js y pnpm instalados
+- Node.js, npm y pnpm instalados
 - MongoDB en ejecución
 
 ### Instalación y Construcción del Proyecto
